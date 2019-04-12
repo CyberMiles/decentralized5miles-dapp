@@ -1,15 +1,11 @@
-import {
-  LOAD_NUM_OF_PRODUCT,
-  LOAD_NUM_OF_COMMENT,
-  LOAD_RECENT_ITEMS,
-} from './actionTypes';
+import { LOAD_NUM_OF_PRODUCTS, LOAD_NUM_OF_COMMENTS, LOAD_RECENT_ITEMS } from './actionTypes';
 
-export const loadNumOfProduct = () => ({
-  type: LOAD_NUM_OF_PRODUCT,
+export const loadNumOfProducts = () => ({
+  type: LOAD_NUM_OF_PRODUCTS,
 });
 
-export const loadNumOfComment = () => ({
-  type: LOAD_NUM_OF_COMMENT,
+export const loadNumOfComments = () => ({
+  type: LOAD_NUM_OF_COMMENTS,
 });
 
 export const loadRecentItems = () => ({

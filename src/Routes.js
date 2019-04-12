@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import routes from './constants/routes';
 import App from './App';
 import { view as HomePage } from './home';
 // import { view as ProductPage } from './product';
@@ -9,10 +8,10 @@ import { view as HomePage } from './home';
 export default () => (
   <App>
     <Switch>
-      {/* <Route path={routes.PRODUCT_DETAILS} component={ProductPage} /> */}
-      {/* <Route path={routes.COMMENT_LIST} component={CommentListPage} /> */}
-      {/* <Route path={routes.COMMENT_DETAILS} component={CommentDetailsPage} /> */}
-      <Route path={routes.HOME} component={HomePage} />
+      {/* <Route path="/product-details" component={ProductPage} /> */}
+      {/* <Route path="/comment-list" component={CommentListPage} /> */}
+      {/* <Route path="/comment-details" component={CommentDetailsPage} /> */}
+      <Route path="/" component={HomePage} />
     </Switch>
   </App>
 );
