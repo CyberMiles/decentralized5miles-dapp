@@ -5,18 +5,18 @@ const initialState = () => ({
   numOfComment: 0,
 });
 
-const loadNumOfProduct = () => {
-
-};
+const loadNumOfProduct = state => ({
+  ...state,
+});
 
 export default (state = initialState(), action) => {
   switch (action.type) {
-    case LOAD_NUM_OF_PRODUCT: {
-      break;
-    }
-    case LOAD_NUM_OF_COMMENT: {
-      break;
-    }
+    // case LOAD_NUM_OF_PRODUCT: {
+    //   break;
+    // }
+    // case LOAD_NUM_OF_COMMENT: {
+    //   break;
+    // }
     default:
       return state;
   }
