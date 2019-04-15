@@ -5,8 +5,8 @@ import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import createRootReducer from '../reducers';
 import { actions as homeActions } from '../home';
-// import { actions as productActions } from '../product';
-// import { actions as commentActions } from '../comment';
+import { actions as productActions } from '../product';
+import { actions as commentActions } from '../comment';
 
 const history = createHashHistory();
 
@@ -38,8 +38,8 @@ const configureStore = (initialState = {}) => {
   // Redux DevTools Configuration
   const actionCreators = {
     ...homeActions,
-    // ...productActions,
-    // ...commentActions,
+    ...productActions,
+    ...commentActions,
     ...routerActions,
   };
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose

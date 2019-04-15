@@ -1,11 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
-import './index.css';
+// import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Root from './Root';
 
 import { configureStore, history } from './store/configureStore';
 // import './app.global.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = configureStore();
 
