@@ -1,75 +1,72 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Container, Row, Col, Media, Toast, ToastBody, ToastHeader } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col, Media, Card, CardTitle, CardText } from 'reactstrap';
+import PropTypes from 'prop-types';
 import * as actions from './actions';
 import routes from '../constants/routes';
+import logo from '../logo.png';
+import ClickableCardGroup from "./ClickableCardGroup.jsx";
+import styles from './home.css';
 
 class HomePage extends React.Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
     this.props.loadNumOfProducts();
     this.props.loadNumOfComments();
+    this.props.loadRecentItems();
+  }
+
+  onProductClicked(key, e) {
+    // const productId = e.target.getAttribute('key');
+    this.props.history.push(`${routes.PRODUCT_DETAILS}?productId=${key}`);
   }
 
   render() {
-    const { numOfProducts, numOfComments, contractAddress } = this.props;
+    const { numOfProducts, numOfComments, contractAddress, recentItems } = this.props;
     return (
-      // <div className="App">
-      //   <header className="App-header">
-      //     <img src={logo} className="App-logo" alt="logo" />
-      //     <p>
-      //       Edit <code>src/App.js</code> and save to reload.
-      //     </p>
-      //     <a
-      //       className="App-link"
-      //       href="https://reactjs.org"
-      //       target="_blank"
-      //       rel="noopener noreferrer"
-      //     >
-      //       Learn React
-      //     </a>
-      //   </header>
-      //   <p>Product Info: {numOfProducts}</p>
-      //   <p>Product Review: {numOfComments}</p>
-      // </div>
-      <Container>
-        <Row>
-          <Col>
-            <Media>
-              <Media left href="#">
-                <Media object data-src="holder.js/64x64" alt="Logo" />
+      <div>
+        <header>
+          <h1 align="center">Decentralized e-commerce at 5miles</h1>
+          <hr />
+        </header>
+
+        <Container>
+          <Row>
+            <Col>
+              <Media>
+                <Media left>
+                  <Media object src={logo} alt="logo" className="logo" />
+                </Media>
+                <Media body>
+                  <Media heading>Contract Address</Media>
+                  {contractAddress}
+                </Media>
               </Media>
-              <Media body>
-                {/* <Media heading>
-                  Media heading
-                </Media> */}
-                Contract Address: {contractAddress}
-              </Media>
-            </Media>
-          </Col>
-        </Row>
-        <Row>
-          <Col>Product Info {numOfProducts}</Col>
-          <Col>Product Review {numOfComments}</Col>
-        </Row>
-        <Row>
-          <Col>Showing the last 100 Records</Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="p-3 my-2 rounded">
-              <Toast>
-                <ToastHeader>Product Title</ToastHeader>
-                <ToastBody>
-                  This is a toast on a primary background — check it out!
-                  <Link to={{ pathname: routes.PRODUCT_DETAILS, search: '?productId=1' }}>Details</Link>
-                </ToastBody>
-              </Toast>
-            </div>
-          </Col>
-        </Row>
-      </Container>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm="4">
+              <Card body>
+                <CardTitle>Product Info</CardTitle>
+                <CardText>{numOfProducts}</CardText>
+              </Card>
+            </Col>
+            <Col sm="4">
+              <Card body>
+                <CardTitle>Product Review</CardTitle>
+                <CardText>{numOfComments}</CardText>
+              </Card>
+            </Col>
+          </Row>
+          <Row>
+            <Col>Showing the last 100 Records</Col>
+          </Row>
+          {recentItems.map(item => (
+            <ClickableCardGroup item={item} onClick={this.onProductClicked.bind(this, item.id)} key={item.id}/>
+          ))}
+        </Container>
+      </div>
     );
   }
 }
@@ -77,12 +74,18 @@ class HomePage extends React.Component {
 const mapStateToProps = state => ({
   numOfProducts: state.home.numOfProducts,
   numOfComments: state.home.numOfComments,
+  contractAddress: state.home.contractAddress,
   recentItems: state.home.recentItems,
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(actions, dispatch);
 };
+
+// HomePage.protoTypes = {
+//   history: PropTypes.object,
+//   numOfProducts: PropTypes.number,
+// };
 
 export default connect(
   mapStateToProps,

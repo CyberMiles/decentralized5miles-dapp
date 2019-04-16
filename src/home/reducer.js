@@ -5,6 +5,8 @@ import constants from '../constants/constants';
 const initialState = () => ({
   numOfProducts: 0,
   numOfComments: 0,
+  contractAddress: constants.CONTRACT_ADDRESS,
+  recentItems: [],
 });
 
 const loadNumOfProducts = state => {
@@ -14,9 +16,8 @@ const loadNumOfProducts = state => {
     constants.CONTRACT_ADDRESS,
     constants.OWNER_ADDRESS
   );
-  const numOfProducts = contract.call('numOfProducts', {});
 
-  return { ...state, numOfProducts: numOfProducts.toNumber() };
+  return { ...state, numOfProducts: contract.numOfProducts().toNumber() };
 };
 
 const loadNumOfComments = state => {
@@ -26,14 +27,25 @@ const loadNumOfComments = state => {
     constants.CONTRACT_ADDRESS,
     constants.ONNER_ADDRESS
   );
-  const numOfComments = contract.call('numOfComments', {});
 
-  return { ...state, numOfComments: numOfComments.toNumber() };
+  return { ...state, numOfComments: contract.numOfComments().toNumber() };
 };
 
-const loadRecentItems = state => ({
-  ...state,
-});
+const loadRecentItems = state => {
+  const contract = new ContractWrapper(
+    constants.WEB3_PROVIDER,
+    constants.ABI,
+    constants.CONTRACT_ADDRESS,
+    constants.ONNER_ADDRESS
+  );
+
+  const recentItems = [];
+  constants.RECENT_ITEM_IDS.map(id => {
+    recentItems.push(contract.getProductById(id));
+  });
+
+  return { ...state, recentItems };
+};
 
 export default (state = initialState(), action) => {
   switch (action.type) {

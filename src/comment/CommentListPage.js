@@ -7,26 +7,35 @@ import * as actions from './actions';
 import routes from '../constants/routes';
 
 class CommentListPage extends React.Component {
-  componentDidMount() {}
-
-  render() {
-    const { commentList, location } = this.props;
+  constructor(props) {
+    super(props);
+    const { location } = this.props;
     const params = new URLSearchParams(location.search);
     const productId = params.get('productId');
+    this.props.loadCommentList(productId);
+  }
+
+  handleClick(key) {
+    this.props.history.push(`${routes.COMMENT_DETAILS}?commentId=${key}`);
+  }
+
+  render() {
+    const { commentList } = this.props;
 
     return (
       <div>
-        <div>
-          <Link to={{ pathname: routes.PRODUCT_DETAILS, search: `?id=${productId}` }}>后退</Link>
-        </div>
+        <header>
+          {/* <Link to={{ pathname: routes.PRODUCT_DETAILS, search: `?id=${productId}` }}>后退</Link> */}
+          <h1 align="center">Review List</h1>
+          <hr />
+        </header>
         <div className="p-3 my-2 rounded">
-          <Toast>
-            <ToastHeader>Product Title</ToastHeader>
-            <ToastBody>
-              This is a toast on a primary background — check it out!
-              <Link to={{ pathname: routes.COMMENT_DETAILS, search: '?commentId=1' }}>Details</Link>
-            </ToastBody>
-          </Toast>
+          {commentList.map(comment => (
+            <Toast key={comment.id} style={{ cursor: 'pointer' }} onClick={this.handleClick.bind(this, comment.id)}>
+              <ToastHeader>Review Text</ToastHeader>
+              <ToastBody>{comment.content}</ToastBody>
+            </Toast>
+          ))}
         </div>
       </div>
     );

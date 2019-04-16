@@ -2,7 +2,10 @@ import { LOAD_COMMENT_DETAILS, LOAD_COMMENT_LIST } from './actionTypes';
 import ContractWrapper from '../utils/ContractWrapper';
 import constants from '../constants/constants';
 
-const initialState = () => ({});
+const initialState = () => ({
+  commentList: [],
+  comment: null,
+});
 
 const loadCommentDetails = (state, id) => {
   const contract = new ContractWrapper(
@@ -11,9 +14,9 @@ const loadCommentDetails = (state, id) => {
     constants.CONTRACT_ADDRESS,
     constants.OWNER_ADDRESS
   );
-  const numOfProducts = contract.call('getCommentById', {});
+  const comment = contract.getCommentById(id);
 
-  return { ...state, numOfProducts: numOfProducts.toNumber() };
+  return { ...state, comment };
 };
 
 const loadCommentList = (state, productId) => {
@@ -23,9 +26,9 @@ const loadCommentList = (state, productId) => {
     constants.CONTRACT_ADDRESS,
     constants.ONNER_ADDRESS
   );
-  const numOfComments = contract.call('numOfComments', {});
+  const commentList = contract.getCommentsByProduct(productId);
 
-  return { ...state, numOfComments: numOfComments.toNumber() };
+  return { ...state, commentList };
 };
 
 export default (state = initialState(), action) => {

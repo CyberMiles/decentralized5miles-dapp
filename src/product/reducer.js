@@ -6,22 +6,22 @@ const initialState = () => ({
   product: null,
 });
 
-const getProductById = state => {
+const getProductById = (state, id) => {
   const contract = new ContractWrapper(
     constants.WEB3_PROVIDER,
     constants.ABI,
     constants.CONTRACT_ADDRESS,
     constants.OWNER_ADDRESS
   );
-  const numOfProducts = contract.call('getProductById', {});
+  const product = contract.getProductById(id);
 
-  return { ...state, numOfProducts: numOfProducts.toNumber() };
+  return { ...state, product };
 };
 
 export default (state = initialState(), action) => {
   switch (action.type) {
     case LOAD_PRODUCT_DETAILS: {
-      return getProductById(state);
+      return getProductById(state, action.id);
     }
     default:
       return state;
