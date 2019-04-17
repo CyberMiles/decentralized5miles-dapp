@@ -15,6 +15,8 @@ class CommentListPage extends React.Component {
     const params = new URLSearchParams(location.search);
     const productId = params.get('productId');
     loadCommentList(productId);
+
+    // this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(key) {

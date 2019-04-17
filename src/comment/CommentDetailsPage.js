@@ -66,6 +66,10 @@ CommentDetailsPage.propTypes = {
   comment: PropTypes.object,
 };
 
+CommentDetailsPage.defaultProps = {
+  // comment: null,
+};
+
 const mapStateToProps = state => ({
   comment: state.comment.comment,
 });
