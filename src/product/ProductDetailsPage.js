@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import * as actions from './actions';
 import routes from '../constants/routes';
+import styles from './product.css';
 
 class ProductDetailsPage extends React.Component {
   constructor(props) {

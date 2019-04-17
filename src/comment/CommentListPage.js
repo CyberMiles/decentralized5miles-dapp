@@ -5,6 +5,7 @@ import { Toast, ToastBody, ToastHeader } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import * as actions from './actions';
 import routes from '../constants/routes';
+import styles from './comment.css';
 
 class CommentListPage extends React.Component {
   constructor(props) {
