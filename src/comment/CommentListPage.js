@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Toast, ToastBody, ToastHeader } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+// import { Link } from 'react-router-dom';
 import * as actions from './actions';
 import routes from '../constants/routes';
 import styles from './comment.css';
@@ -10,14 +11,15 @@ import styles from './comment.css';
 class CommentListPage extends React.Component {
   constructor(props) {
     super(props);
-    const { location } = this.props;
+    const { location, loadCommentList } = this.props;
     const params = new URLSearchParams(location.search);
     const productId = params.get('productId');
-    this.props.loadCommentList(productId);
+    loadCommentList(productId);
   }
 
   handleClick(key) {
-    this.props.history.push(`${routes.COMMENT_DETAILS}?commentId=${key}`);
+    const { history } = this.props;
+    history.push(`${routes.COMMENT_DETAILS}?commentId=${key}`);
   }
 
   render() {
@@ -32,7 +34,11 @@ class CommentListPage extends React.Component {
         </header>
         <div className="p-3 my-2 rounded">
           {commentList.map(comment => (
-            <Toast key={comment.id} style={{ cursor: 'pointer' }} onClick={this.handleClick.bind(this, comment.id)}>
+            <Toast
+              key={comment.id}
+              style={{ cursor: 'pointer' }}
+              onClick={this.handleClick.bind(this, comment.id)}
+            >
               <ToastHeader>Review Text</ToastHeader>
               <ToastBody>{comment.content}</ToastBody>
             </Toast>
@@ -42,6 +48,13 @@ class CommentListPage extends React.Component {
     );
   }
 }
+
+CommentListPage.propTypes = {
+  loadCommentList: PropTypes.func.isRequired,
+  commentList: PropTypes.array.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
   commentList: state.comment.commentList,

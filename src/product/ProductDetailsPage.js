@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Card, CardImg, CardText, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as actions from './actions';
 import routes from '../constants/routes';
 import styles from './product.css';
@@ -10,15 +11,14 @@ import styles from './product.css';
 class ProductDetailsPage extends React.Component {
   constructor(props) {
     super(props);
-    const { product, location } = this.props;
+    const { location, loadProductDetails } = this.props;
     const params = new URLSearchParams(location.search);
     this.productId = params.get('productId');
-    this.props.loadProductDetails(this.productId);
+    loadProductDetails(this.productId);
   }
 
   render() {
     const { product } = this.props;
-    // console.log(`#### ${product}`);
 
     if (product == null) {
       return <div />;
@@ -44,14 +44,32 @@ class ProductDetailsPage extends React.Component {
                 Product ID: <br />
                 {product.id}
               </CardText>
-              <CardText>Title: <br/>{product.title}</CardText>
-              <CardText>Description: <br/>{product.desc}</CardText>
-              <CardText>Category: <br/> {product.category}</CardText>
-              <CardText>State: <br/> {product.state}</CardText>
-              <CardText>User ID: <br/> {product.userId}</CardText>
-              <CardText>Location: <br/> {product.location}</CardText>
-              <CardText>Created At: <br/> {product.createdAt}</CardText>
-              <CardText>Updated At: <br/> {product.updatedAt}</CardText>
+              <CardText>
+                Title: <br />
+                {product.title}
+              </CardText>
+              <CardText>
+                Description: <br />
+                {product.desc}
+              </CardText>
+              <CardText>
+                Category: <br /> {product.category}
+              </CardText>
+              <CardText>
+                State: <br /> {product.state}
+              </CardText>
+              <CardText>
+                User ID: <br /> {product.userId}
+              </CardText>
+              <CardText>
+                Location: <br /> {product.location}
+              </CardText>
+              <CardText>
+                Created At: <br /> {product.createdAt}
+              </CardText>
+              <CardText>
+                Updated At: <br /> {product.updatedAt}
+              </CardText>
               <Link to={{ pathname: routes.COMMENT_LIST, search: `?productId=${this.productId}` }}>
                 Review
               </Link>
@@ -62,6 +80,12 @@ class ProductDetailsPage extends React.Component {
     );
   }
 }
+
+ProductDetailsPage.propTypes = {
+  product: PropTypes.object,
+  location: PropTypes.object.isRequired,
+  loadProductDetails: PropTypes.func,
+};
 
 const mapStateToProps = state => ({
   product: state.product.product,

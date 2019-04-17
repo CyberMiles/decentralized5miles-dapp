@@ -28,7 +28,19 @@ export default class ContractWrapper {
 
   getProductById(id) {
     const res = this.call('getProductById', id);
-    const [, title, desc, price, category, userId, imageLink, location, state, createdAt, updatedAt] = res.split('|');
+    const [
+      ,
+      title,
+      desc,
+      price,
+      category,
+      userId,
+      imageLink,
+      location,
+      state,
+      createdAt,
+      updatedAt,
+    ] = res.split('|');
     const product = new Product(
       id,
       title,
@@ -59,7 +71,7 @@ export default class ContractWrapper {
     try {
       const res = this.call('getCommentsByProduct', productId);
       const commentIds = res.split('|');
-      commentIds.map(id => {
+      commentIds.forEach(id => {
         comments.push(this.getCommentById(id));
       });
 

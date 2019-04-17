@@ -6,20 +6,21 @@ import PropTypes from 'prop-types';
 import * as actions from './actions';
 import routes from '../constants/routes';
 import logo from '../logo.png';
-import ClickableCardGroup from "./ClickableCardGroup.jsx";
+import ClickableCardGroup from './ClickableCardGroup.js';
 import styles from './home.css';
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.props.loadNumOfProducts();
-    this.props.loadNumOfComments();
-    this.props.loadRecentItems();
+    const { loadNumOfComments, loadNumOfProducts, loadRecentItems } = this.props;
+    loadNumOfProducts();
+    loadNumOfComments();
+    loadRecentItems();
   }
 
-  onProductClicked(key, e) {
-    // const productId = e.target.getAttribute('key');
-    this.props.history.push(`${routes.PRODUCT_DETAILS}?productId=${key}`);
+  onProductClicked(key) {
+    const { history } = this.props;
+    history.push(`${routes.PRODUCT_DETAILS}?productId=${key}`);
   }
 
   render() {
@@ -63,7 +64,11 @@ class HomePage extends React.Component {
             <Col>Showing the last 100 Records</Col>
           </Row>
           {recentItems.map(item => (
-            <ClickableCardGroup item={item} onClick={this.onProductClicked.bind(this, item.id)} key={item.id}/>
+            <ClickableCardGroup
+              item={item}
+              onClick={this.onProductClicked.bind(this, item.id)}
+              key={item.id}
+            />
           ))}
         </Container>
       </div>
@@ -82,10 +87,20 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(actions, dispatch);
 };
 
-// HomePage.protoTypes = {
-//   history: PropTypes.object,
-//   numOfProducts: PropTypes.number,
-// };
+HomePage.propTypes = {
+  numOfProducts: PropTypes.number.isRequired,
+  numOfComments: PropTypes.number.isRequired,
+  contractAddress: PropTypes.string.isRequired,
+  history: PropTypes.object,
+  recentItems: PropTypes.array,
+  loadNumOfProducts: PropTypes.func.isRequired,
+  loadNumOfComments: PropTypes.func.isRequired,
+  loadRecentItems: PropTypes.func.isRequired,
+};
+
+HomePage.defaultProps = {
+  recentItems: [],
+};
 
 export default connect(
   mapStateToProps,

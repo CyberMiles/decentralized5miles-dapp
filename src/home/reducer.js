@@ -40,7 +40,7 @@ const loadRecentItems = state => {
   );
 
   const recentItems = [];
-  constants.RECENT_ITEM_IDS.map(id => {
+  constants.RECENT_ITEM_IDS.forEach(id => {
     recentItems.push(contract.getProductById(id));
   });
 

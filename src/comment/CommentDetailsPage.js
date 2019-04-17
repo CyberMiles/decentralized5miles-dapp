@@ -1,18 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Card, CardText, CardBody } from 'reactstrap';
+import PropTypes from 'prop-types';
 import * as actions from './actions';
-import routes from '../constants/routes';
+import styles from './comment.css';
 
 class CommentDetailsPage extends React.Component {
   constructor(props) {
     super(props);
-    const { location } = this.props;
+    const { location, loadCommentDetails } = this.props;
     const params = new URLSearchParams(location.search);
     const commentId = params.get('commentId');
-    this.props.loadCommentDetails(commentId);
+    loadCommentDetails(commentId);
   }
 
   render() {
@@ -59,6 +59,12 @@ class CommentDetailsPage extends React.Component {
     );
   }
 }
+
+CommentDetailsPage.propTypes = {
+  location: PropTypes.object.isRequired,
+  loadCommentDetails: PropTypes.func.isRequired,
+  comment: PropTypes.object,
+};
 
 const mapStateToProps = state => ({
   comment: state.comment.comment,
