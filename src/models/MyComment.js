@@ -8,6 +8,11 @@ class MyComment {
     this.createdAt = new Date(parseInt(createdAt, 10) * 1000).toISOString();
   }
 
+  static fromString(rawStr) {
+    const [id, productId, userId, content, createdAt] = rawStr.split('|');
+    return new MyComment(id, productId, userId, content, createdAt);
+  }
+
   toString() {
     return `Comment[id=${this.id}, productId=${this.productId}, userId=${this.userId}, content=${
       this.content

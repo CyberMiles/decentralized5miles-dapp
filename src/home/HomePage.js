@@ -10,8 +10,7 @@ import ClickableCardGroup from './ClickableCardGroup.js';
 import styles from './home.css';
 
 class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     const { loadNumOfComments, loadNumOfProducts, loadRecentItems } = this.props;
     loadNumOfProducts();
     loadNumOfComments();
@@ -24,7 +23,15 @@ class HomePage extends React.Component {
   }
 
   render() {
-    const { numOfProducts, numOfComments, contractAddress, recentItems } = this.props;
+    const { numOfProducts, numOfComments, contractAddress, recentItems, status } = this.props;
+
+    let snippet = <div>LOADING</div>;
+    if (status === 'LOADED') {
+      snippet = recentItems.map(item => (
+        <ClickableCardGroup item={item} onClick={this.onProductClicked.bind(this, item.id)} key={item.id} />
+      ));
+    }
+
     return (
       <div>
         <header>
@@ -63,13 +70,7 @@ class HomePage extends React.Component {
           <Row>
             <Col>Showing the last 100 Records</Col>
           </Row>
-          {recentItems.map(item => (
-            <ClickableCardGroup
-              item={item}
-              onClick={this.onProductClicked.bind(this, item.id)}
-              key={item.id}
-            />
-          ))}
+          {snippet}
         </Container>
       </div>
     );
@@ -81,6 +82,7 @@ const mapStateToProps = state => ({
   numOfComments: state.home.numOfComments,
   contractAddress: state.home.contractAddress,
   recentItems: state.home.recentItems,
+  status: state.home.status,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -88,18 +90,20 @@ const mapDispatchToProps = dispatch => {
 };
 
 HomePage.propTypes = {
-  numOfProducts: PropTypes.number.isRequired,
-  numOfComments: PropTypes.number.isRequired,
-  contractAddress: PropTypes.string.isRequired,
+  numOfProducts: PropTypes.number,
+  numOfComments: PropTypes.number,
+  contractAddress: PropTypes.string,
   history: PropTypes.object,
   recentItems: PropTypes.array,
   loadNumOfProducts: PropTypes.func.isRequired,
   loadNumOfComments: PropTypes.func.isRequired,
   loadRecentItems: PropTypes.func.isRequired,
+  status: PropTypes.string,
 };
 
 HomePage.defaultProps = {
   recentItems: [],
+  status: 'LOADING',
 };
 
 export default connect(

@@ -9,8 +9,7 @@ import routes from '../constants/routes';
 import styles from './product.css';
 
 class ProductDetailsPage extends React.Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     const { location, loadProductDetails } = this.props;
     const params = new URLSearchParams(location.search);
     this.productId = params.get('productId');
@@ -18,10 +17,10 @@ class ProductDetailsPage extends React.Component {
   }
 
   render() {
-    const { product } = this.props;
+    const { product, status } = this.props;
 
-    if (product == null) {
-      return <div />;
+    if (status === 'LOADING') {
+      return <div>LOADING</div>;
     }
 
     return (
@@ -85,10 +84,12 @@ ProductDetailsPage.propTypes = {
   product: PropTypes.object,
   location: PropTypes.object.isRequired,
   loadProductDetails: PropTypes.func,
+  status: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   product: state.product.product,
+  status: state.product.status,
 });
 
 const mapDispatchToProps = dispatch => {

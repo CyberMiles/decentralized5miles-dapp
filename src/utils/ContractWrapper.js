@@ -1,6 +1,7 @@
 import Web3 from 'web3-cmt';
 import Product from '../models/Product';
 import MyComment from '../models/MyComment';
+import constants from '../constants/constants';
 
 export default class ContractWrapper {
   constructor(web3Provider, abi, contractAddress, ownerAccount) {
@@ -12,10 +13,21 @@ export default class ContractWrapper {
 
   call(method, params) {
     console.log(`Call contract method ${method} with params: ${params}`);
-    const res = this.instance[method].call(params);
-    console.log(`Result of calling contract: ${res}`);
 
-    return res;
+    return new Promise((resolve, reject) => {
+      this.instance[method].call(params, (error, result) => {
+        if (!error) {
+          resolve(result);
+        } else {
+          console.error(error);
+          reject(error);
+        }
+      });
+    });
+
+    // console.log(`Result of calling contract: ${res}`);
+
+    // return res;
   }
 
   numOfProducts() {
@@ -27,58 +39,39 @@ export default class ContractWrapper {
   }
 
   getProductById(id) {
-    const res = this.call('getProductById', id);
-    const [
-      ,
-      title,
-      desc,
-      price,
-      category,
-      userId,
-      imageLink,
-      location,
-      state,
-      createdAt,
-      updatedAt,
-    ] = res.split('|');
-    const product = new Product(
-      id,
-      title,
-      desc,
-      price,
-      category,
-      userId,
-      imageLink,
-      location,
-      state,
-      createdAt,
-      updatedAt
-    );
-
-    return product;
+    return this.call('getProductById', id);
   }
 
   getCommentById(id) {
-    const res = this.call('getCommentById', id);
-    const [, productId, userId, content, createdAt] = res.split('|');
-    const comment = new MyComment(id, productId, userId, content, createdAt);
-    return comment;
+    return this.call('getCommentById', id);
   }
 
+  // getCommentsByProduct(productId) {
+  //   const comments = [];
+
+  //   try {
+  //     const res = this.call('getCommentsByProduct', productId);
+  //     const commentIds = res.split('|');
+  //     commentIds.forEach(id => {
+  //       comments.push(this.getCommentById(id));
+  //     });
+
+  //     return comments;
+  //   } catch (error) {
+  //     console.error(`Something went wrong: ${error}`, error.stack);
+  //     return comments;
+  //   }
+  // }
+
   getCommentsByProduct(productId) {
-    const comments = [];
+    return this.call('getCommentsByProduct', productId);
+  }
 
-    try {
-      const res = this.call('getCommentsByProduct', productId);
-      const commentIds = res.split('|');
-      commentIds.forEach(id => {
-        comments.push(this.getCommentById(id));
-      });
+  loadRecentItems() {
+    const promises = constants.RECENT_ITEM_IDS.map(id => {
+      return this.getProductById(id);
+    });
 
-      return comments;
-    } catch (error) {
-      console.error(`Something went wrong: ${error}`, error.stack);
-      return comments;
-    }
+    return Promise.all(promises);
   }
 }

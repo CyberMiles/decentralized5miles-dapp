@@ -7,8 +7,7 @@ import * as actions from './actions';
 import styles from './comment.css';
 
 class CommentDetailsPage extends React.Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     const { location, loadCommentDetails } = this.props;
     const params = new URLSearchParams(location.search);
     const commentId = params.get('commentId');
@@ -16,10 +15,10 @@ class CommentDetailsPage extends React.Component {
   }
 
   render() {
-    const { comment } = this.props;
+    const { comment, status } = this.props;
 
-    if (comment == null) {
-      return <div />;
+    if (status === 'LOADING') {
+      return <div>LOADING</div>;
     }
 
     return (
@@ -64,14 +63,17 @@ CommentDetailsPage.propTypes = {
   location: PropTypes.object.isRequired,
   loadCommentDetails: PropTypes.func.isRequired,
   comment: PropTypes.object,
+  status: PropTypes.string,
 };
 
 CommentDetailsPage.defaultProps = {
   // comment: null,
+  status: 'LOADING',
 };
 
 const mapStateToProps = state => ({
   comment: state.comment.comment,
+  status: state.comment.commentStatus,
 });
 
 const mapDispatchToProps = dispatch => {

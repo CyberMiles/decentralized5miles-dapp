@@ -26,6 +26,25 @@ class Product {
     this.updatedAt = new Date(parseInt(updatedAt, 10) * 1000).toISOString();
   }
 
+  static fromString(rawStr) {
+    const [id, title, desc, price, category, userId, imageLink, location, state, createdAt, updatedAt] = rawStr.split('|');
+    const ob = new Product(
+      id,
+      title,
+      desc,
+      price,
+      category,
+      userId,
+      imageLink,
+      location,
+      state,
+      createdAt,
+      updatedAt
+    );
+
+    return ob;
+  }
+
   toString() {
     return `Product[id=${this.id}, desc=${this.desc}, price=${this.price}, category=${
       this.category

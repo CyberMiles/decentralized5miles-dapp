@@ -1,5 +1,11 @@
-import { LOAD_NUM_OF_PRODUCTS, LOAD_NUM_OF_COMMENTS, LOAD_RECENT_ITEMS } from './actionTypes';
-import ContractWrapper from '../utils/ContractWrapper';
+import {
+  LOAD_NUM_OF_PRODUCTS_STARTED,
+  LOAD_NUM_OF_PRODUCTS_SUCCESS,
+  LOAD_NUM_OF_COMMENTS_STARTED,
+  LOAD_NUM_OF_COMMENTS_SUCCESS,
+  LOAD_RECENT_ITEMS_SUCCESS,
+  LOAD_RECENT_ITEMS_STARTED,
+} from './actionTypes';
 import constants from '../constants/constants';
 
 const initialState = () => ({
@@ -9,54 +15,25 @@ const initialState = () => ({
   recentItems: [],
 });
 
-const loadNumOfProducts = state => {
-  const contract = new ContractWrapper(
-    constants.WEB3_PROVIDER,
-    constants.ABI,
-    constants.CONTRACT_ADDRESS,
-    constants.OWNER_ADDRESS
-  );
-
-  return { ...state, numOfProducts: contract.numOfProducts().toNumber() };
-};
-
-const loadNumOfComments = state => {
-  const contract = new ContractWrapper(
-    constants.WEB3_PROVIDER,
-    constants.ABI,
-    constants.CONTRACT_ADDRESS,
-    constants.ONNER_ADDRESS
-  );
-
-  return { ...state, numOfComments: contract.numOfComments().toNumber() };
-};
-
-const loadRecentItems = state => {
-  const contract = new ContractWrapper(
-    constants.WEB3_PROVIDER,
-    constants.ABI,
-    constants.CONTRACT_ADDRESS,
-    constants.ONNER_ADDRESS
-  );
-
-  const recentItems = [];
-  constants.RECENT_ITEM_IDS.forEach(id => {
-    recentItems.push(contract.getProductById(id));
-  });
-
-  return { ...state, recentItems };
-};
-
 export default (state = initialState(), action) => {
   switch (action.type) {
-    case LOAD_NUM_OF_PRODUCTS: {
-      return loadNumOfProducts(state);
+    case LOAD_NUM_OF_COMMENTS_STARTED: {
+      return { ...state, status: 'LOADING' };
     }
-    case LOAD_NUM_OF_COMMENTS: {
-      return loadNumOfComments(state);
+    case LOAD_NUM_OF_COMMENTS_SUCCESS: {
+      return { ...state, numOfComments: action.numOfComments, status: 'LOADED' };
     }
-    case LOAD_RECENT_ITEMS: {
-      return loadRecentItems(state);
+    case LOAD_NUM_OF_PRODUCTS_STARTED: {
+      return { ...state, status: 'LOADING' };
+    }
+    case LOAD_NUM_OF_PRODUCTS_SUCCESS: {
+      return { ...state, numOfProducts: action.numOfProducts, status: 'LOADED' };
+    }
+    case LOAD_RECENT_ITEMS_STARTED: {
+      return { ...state, status: 'LOADING' };
+    }
+    case LOAD_RECENT_ITEMS_SUCCESS: {
+      return { ...state, recentItems: action.recentItems, status: 'LOADED' };
     }
     default:
       return state;

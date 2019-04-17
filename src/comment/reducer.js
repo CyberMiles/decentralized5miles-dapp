@@ -1,43 +1,30 @@
-import { LOAD_COMMENT_DETAILS, LOAD_COMMENT_LIST } from './actionTypes';
-import ContractWrapper from '../utils/ContractWrapper';
-import constants from '../constants/constants';
+import {
+  LOAD_COMMENT_DETAILS_STARTED,
+  LOAD_COMMENT_DETAILS_SUCCESS,
+  LOAD_COMMENT_LIST_STARTED,
+  LOAD_COMMENT_LIST_SUCCESS,
+} from './actionTypes';
 
 const initialState = () => ({
   commentList: [],
   comment: null,
+  commentStatus: 'LOADING',
+  commentListStatus: 'LOADING',
 });
-
-const loadCommentDetails = (state, id) => {
-  const contract = new ContractWrapper(
-    constants.WEB3_PROVIDER,
-    constants.ABI,
-    constants.CONTRACT_ADDRESS,
-    constants.OWNER_ADDRESS
-  );
-  const comment = contract.getCommentById(id);
-
-  return { ...state, comment };
-};
-
-const loadCommentList = (state, productId) => {
-  const contract = new ContractWrapper(
-    constants.WEB3_PROVIDER,
-    constants.ABI,
-    constants.CONTRACT_ADDRESS,
-    constants.ONNER_ADDRESS
-  );
-  const commentList = contract.getCommentsByProduct(productId);
-
-  return { ...state, commentList };
-};
 
 export default (state = initialState(), action) => {
   switch (action.type) {
-    case LOAD_COMMENT_DETAILS: {
-      return loadCommentDetails(state, action.id);
+    case LOAD_COMMENT_DETAILS_STARTED: {
+      return { ...state, commentStatus: 'LOADING' };
     }
-    case LOAD_COMMENT_LIST: {
-      return loadCommentList(state, action.productId);
+    case LOAD_COMMENT_DETAILS_SUCCESS: {
+      return { ...state, commentStatus: 'LOADED', comment: action.comment };
+    }
+    case LOAD_COMMENT_LIST_STARTED: {
+      return { ...state, commentListStatus: 'LOADING' };
+    }
+    case LOAD_COMMENT_LIST_SUCCESS: {
+      return { ...state, commentListStatus: 'LOADED', commentList: action.commentList };
     }
     default:
       return state;
