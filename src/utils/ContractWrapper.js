@@ -24,10 +24,6 @@ export default class ContractWrapper {
         }
       });
     });
-
-    // console.log(`Result of calling contract: ${res}`);
-
-    // return res;
   }
 
   numOfProducts() {
@@ -46,23 +42,6 @@ export default class ContractWrapper {
     return this.call('getCommentById', id);
   }
 
-  // getCommentsByProduct(productId) {
-  //   const comments = [];
-
-  //   try {
-  //     const res = this.call('getCommentsByProduct', productId);
-  //     const commentIds = res.split('|');
-  //     commentIds.forEach(id => {
-  //       comments.push(this.getCommentById(id));
-  //     });
-
-  //     return comments;
-  //   } catch (error) {
-  //     console.error(`Something went wrong: ${error}`, error.stack);
-  //     return comments;
-  //   }
-  // }
-
   getCommentsByProduct(productId) {
     return this.call('getCommentsByProduct', productId);
   }
@@ -73,5 +52,9 @@ export default class ContractWrapper {
     });
 
     return Promise.all(promises);
+  }
+
+  productHasComments(productId) {
+    return this.call('productHasComments', productId);
   }
 }

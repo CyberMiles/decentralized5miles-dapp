@@ -10,17 +10,25 @@ import styles from './product.css';
 
 class ProductDetailsPage extends React.Component {
   componentDidMount() {
-    const { location, loadProductDetails } = this.props;
+    const { location, loadProductDetails, productHasComments } = this.props;
     const params = new URLSearchParams(location.search);
     this.productId = params.get('productId');
     loadProductDetails(this.productId);
+    productHasComments(this.productId);
   }
 
   render() {
-    const { product, status } = this.props;
+    const { product, status, hasComments } = this.props;
 
     if (status === 'LOADING') {
       return <div>LOADING</div>;
+    }
+
+    let commentSnippet = <div />;
+    if (hasComments) {
+      commentSnippet = (
+        <Link to={{ pathname: routes.COMMENT_LIST, search: `?productId=${this.productId}` }}>Review</Link>
+      );
     }
 
     return (
@@ -32,12 +40,7 @@ class ProductDetailsPage extends React.Component {
         </header>
         <div>
           <Card>
-            <CardImg
-              top
-              width="100%"
-              src="https://fivemiles-res.cloudinary.com/image/upload/f_auto,t_i800/v1554684850/qgbwrxrltzpnvy6kkwb5.jpg"
-              alt={product.title}
-            />
+            <CardImg top width="100%" src={product.imageLink} alt={product.title} />
             <CardBody>
               <CardText>
                 Product ID: <br />
@@ -69,9 +72,7 @@ class ProductDetailsPage extends React.Component {
               <CardText>
                 Updated At: <br /> {product.updatedAt}
               </CardText>
-              <Link to={{ pathname: routes.COMMENT_LIST, search: `?productId=${this.productId}` }}>
-                Review
-              </Link>
+              {commentSnippet}
             </CardBody>
           </Card>
         </div>
@@ -84,12 +85,19 @@ ProductDetailsPage.propTypes = {
   product: PropTypes.object,
   location: PropTypes.object.isRequired,
   loadProductDetails: PropTypes.func,
+  productHasComments: PropTypes.func,
   status: PropTypes.string.isRequired,
+  hasComments: PropTypes.bool.isRequired,
 };
+
+// ProductDetailsPage.defaultProps = {
+//   hasComments: false,
+// };
 
 const mapStateToProps = state => ({
   product: state.product.product,
   status: state.product.status,
+  hasComments: state.product.hasComments,
 });
 
 const mapDispatchToProps = dispatch => {
