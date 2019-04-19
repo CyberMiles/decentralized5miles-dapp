@@ -27,8 +27,8 @@ export const loadProductDetailsSuccess = product => ({
 export const loadProductDetails = id => {
   return dispatch => {
     dispatch(loadProductDetailsStarted(id));
-    contract.getProductById(id).then(rawStr => {
-      dispatch(loadProductDetailsSuccess(Product.fromString(rawStr)));
+    contract.getProductById(id).then(rawStrArray => {
+      dispatch(loadProductDetailsSuccess(Product.fromStringArray(rawStrArray)));
     });
   };
 };

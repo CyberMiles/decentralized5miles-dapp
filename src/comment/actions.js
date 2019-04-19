@@ -30,8 +30,8 @@ export const loadCommentList = productId => {
     dispatch(loadCommentListStarted(productId));
     contract.getCommentsByProduct(productId).then(commentIds => {
       const promises = commentIds.split('|').map(commentId => {
-        return contract.getCommentById(commentId).then(rawStr => {
-          return MyComment.fromString(rawStr);
+        return contract.getCommentById(commentId).then(rawStrArray => {
+          return MyComment.fromStringArray(rawStrArray);
         });
       });
 
@@ -62,8 +62,8 @@ export const loadCommentDetails = id => {
 
   return dispatch => {
     dispatch(loadCommentDetailsStarted(id));
-    contract.getCommentById(id).then(rawStr => {
-      dispatch(loadCommentDetailsSuccess(MyComment.fromString(rawStr)));
+    contract.getCommentById(id).then(rawStrArray => {
+      dispatch(loadCommentDetailsSuccess(MyComment.fromStringArray(rawStrArray)));
     });
   };
 };

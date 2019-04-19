@@ -80,8 +80,9 @@ export const loadRecentItems = () => {
   return dispatch => {
     dispatch(loadRecentItemsStarted());
     contract.loadRecentItems().then(rawStrArray => {
+      // id|userId|status||createdAt|updatedAt, title, desc, price, category, location, imageLink
       const recentItems = rawStrArray.map(rawStr => {
-        return Product.fromString(rawStr);
+        return Product.fromStringArray(rawStr);
       });
       dispatch(loadRecentItemsSuccess(recentItems));
     });

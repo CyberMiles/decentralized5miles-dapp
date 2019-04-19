@@ -12,8 +12,8 @@ class MyComment {
     }
   }
 
-  static fromString(rawStr) {
-    const [id, productId, userId, content, createdAt] = rawStr.split('|');
+  static fromStringArray(rawStrArray) {
+    const [id, productId, userId, content, createdAt] = rawStrArray;
     return new MyComment(id, productId, userId, content, createdAt);
   }
 
