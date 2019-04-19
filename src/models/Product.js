@@ -27,7 +27,7 @@ class Product {
   }
 
   static fromString(rawStr) {
-    const [id, title, desc, price, category, userId, imageLink, location, state, createdAt, updatedAt] = rawStr.split('|');
+    const [id, title, desc, price, category, userId, location, state, createdAt, updatedAt, imageLink] = rawStr.split('|');
     const ob = new Product(
       id,
       title,
