@@ -22,8 +22,17 @@ class Product {
     this.imageLink = imageLink;
     this.location = location;
     this.state = state;
-    this.createdAt = new Date(parseInt(createdAt, 10) * 1000).toISOString();
-    this.updatedAt = new Date(parseInt(updatedAt, 10) * 1000).toISOString();
+    try {
+      this.createdAt = new Date(parseInt(createdAt, 10) * 1000).toISOString();
+    } catch (error) {
+      this.createdAt = 'N/A';
+    }
+
+    try {
+      this.updatedAt = new Date(parseInt(updatedAt, 10) * 1000).toISOString();
+    } catch (error) {
+      this.updatedAt = 'N/A';
+    }
   }
 
   static fromString(rawStr) {

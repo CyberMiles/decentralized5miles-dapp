@@ -5,7 +5,11 @@ class MyComment {
     this.productId = productId;
     this.userId = userId;
     this.content = content;
-    this.createdAt = new Date(parseInt(createdAt, 10) * 1000).toISOString();
+    try {
+      this.createdAt = new Date(parseInt(createdAt, 10) * 1000).toISOString();
+    } catch (error) {
+      this.createdAt = 'N/A';
+    }
   }
 
   static fromString(rawStr) {
