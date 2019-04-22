@@ -28,7 +28,9 @@ class HomePage extends React.Component {
     let snippet = <div>LOADING</div>;
     if (status === 'LOADED') {
       snippet = recentItems.map(item => (
-        <ClickableCardGroup item={item} onClick={this.onProductClicked.bind(this, item.id)} key={item.id} />
+        <Row>
+          <ClickableCardGroup item={item} onClick={this.onProductClicked.bind(this, item.id)} key={item.id} />
+        </Row>
       ));
     }
 
@@ -54,21 +56,21 @@ class HomePage extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col sm="4">
-              <Card body>
-                <CardTitle>Product Info</CardTitle>
+            <Col>
+              <Card body className="text-center">
+                <CardTitle className="h3">Product Info</CardTitle>
                 <CardText>{numOfProducts}</CardText>
               </Card>
             </Col>
-            <Col sm="4">
-              <Card body>
-                <CardTitle>Product Review</CardTitle>
+            <Col>
+              <Card body className="text-center">
+                <CardTitle className="h3">Product Review</CardTitle>
                 <CardText>{numOfComments}</CardText>
               </Card>
             </Col>
           </Row>
           <Row>
-            <Col>Showing the last 100 Records</Col>
+            <Col style={{ 'margin-bottom': '0.5rem', 'margin-top': '0.5rem' }}>Showing the recent records</Col>
           </Row>
           {snippet}
         </Container>
