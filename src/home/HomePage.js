@@ -28,18 +28,16 @@ class HomePage extends React.Component {
     let snippet = <div>LOADING</div>;
     if (status === 'LOADED') {
       snippet = recentItems.map(item => (
-        <Row>
-          <ClickableCardGroup item={item} onClick={this.onProductClicked.bind(this, item.id)} key={item.id} />
-        </Row>
+        <ClickableCardGroup item={item} onClick={this.onProductClicked.bind(this, item.id)} key={item.id} />
       ));
     }
 
     return (
       <div>
-        <header>
+        {/* <header>
           <h1 align="center">Decentralized e-commerce at 5miles</h1>
           <hr />
-        </header>
+        </header> */}
 
         <Container>
           <Row>
@@ -58,13 +56,13 @@ class HomePage extends React.Component {
           <Row>
             <Col>
               <Card body className="text-center">
-                <CardTitle className="h3">Product Info</CardTitle>
+                <CardTitle className="h4">Product</CardTitle>
                 <CardText>{numOfProducts}</CardText>
               </Card>
             </Col>
             <Col>
               <Card body className="text-center">
-                <CardTitle className="h3">Product Review</CardTitle>
+                <CardTitle className="h4">Review</CardTitle>
                 <CardText>{numOfComments}</CardText>
               </Card>
             </Col>

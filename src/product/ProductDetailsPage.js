@@ -33,44 +33,44 @@ class ProductDetailsPage extends React.Component {
 
     return (
       <div>
-        <header>
-          {/* <Link to={routes.HOME}>后退</Link> */}
+        {/* <header>
           <h1 align="center">Product Details</h1>
           <hr />
-        </header>
+        </header> */}
         <div>
           <Card>
             <CardImg top width="100%" src={product.imageLink} alt={product.title} />
             <CardBody>
               <CardText>
-                Product ID: <br />
-                {product.id}
+                <h5>Product ID: </h5>
+                <p>{product.id}</p>
               </CardText>
               <CardText>
-                Title: <br />
-                {product.title}
+                <h5>Title: </h5>
+                <p>{product.title}</p>
               </CardText>
               <CardText>
-                Description: <br />
-                {product.desc}
+                <h5>Description: </h5>
+                <p>{product.desc}</p>
               </CardText>
               <CardText>
-                Category: <br /> {product.category}
+                <h5>Category: </h5> <p>{product.category}</p>
               </CardText>
               <CardText>
-                State: <br /> {product.state}
+                <h5>State: </h5>
+                <p> {product.state}</p>
               </CardText>
               <CardText>
-                User ID: <br /> {product.userId}
+                <h5>User ID: </h5> <p>{product.userId}</p>
               </CardText>
               <CardText>
-                Location: <br /> {product.location}
+                <h5>Location: </h5> <p>{product.location}</p>
               </CardText>
               <CardText>
-                Created At: <br /> {product.createdAt}
+                <h5>Created At: </h5> <p>{product.createdAt}</p>
               </CardText>
               <CardText>
-                Updated At: <br /> {product.updatedAt}
+                <h5>Updated At: </h5> <p>{product.updatedAt}</p>
               </CardText>
               {commentSnippet}
             </CardBody>

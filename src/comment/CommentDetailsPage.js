@@ -23,33 +23,34 @@ class CommentDetailsPage extends React.Component {
 
     return (
       <div>
-        <header>
-          {/* <Link to={{ pathname: routes.COMMENT_LIST, search: `?id=${commentId}` }}>后退</Link> */}
+        {/* <header>
           <h1 align="center">Review Details</h1>
           <hr />
-        </header>
+        </header> */}
         <div>
           <Card>
             <CardBody>
               <CardText>
-                Review ID: <br />
-                {comment.id}
+                <h5>Review ID: </h5>
+                <p>{comment.id}</p>
               </CardText>
               <CardText>
-                Product ID: <br />
-                {comment.productId}
+                <h5>
+                  Product ID: <br />
+                </h5>
+                <p>{comment.productId}</p>
               </CardText>
               <CardText>
-                Review Text: <br />
-                {comment.content}
+                <h5>Review Text: </h5>
+                <p>{comment.content}</p>
               </CardText>
               <CardText>
-                Reviewer ID: <br />
-                {comment.userId}
+                <h5>Reviewer ID: </h5>
+                <p>{comment.userId}</p>
               </CardText>
               <CardText>
-                Created At: <br />
-                {comment.createdAt}
+                <h5>Created At: </h5>
+                <p>{comment.createdAt}</p>
               </CardText>
             </CardBody>
           </Card>

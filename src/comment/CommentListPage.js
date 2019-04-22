@@ -36,11 +36,10 @@ class CommentListPage extends React.Component {
 
     return (
       <div>
-        <header>
-          {/* <Link to={{ pathname: routes.PRODUCT_DETAILS, search: `?id=${productId}` }}>后退</Link> */}
+        {/* <header>
           <h1 align="center">Review List</h1>
           <hr />
-        </header>
+        </header> */}
         <div className="p-3 bg-success my-2 rounded">{snippet}</div>
       </div>
     );
