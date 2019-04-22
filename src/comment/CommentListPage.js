@@ -40,7 +40,7 @@ class CommentListPage extends React.Component {
           <h1 align="center">Review List</h1>
           <hr />
         </header> */}
-        <div className="p-3 bg-success my-2 rounded">{snippet}</div>
+        <div className="p-3 my-2 rounded">{snippet}</div>
       </div>
     );
   }
