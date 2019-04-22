@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Card, CardImg, CardText, CardBody } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, Row, Col, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as actions from './actions';
@@ -27,7 +27,9 @@ class ProductDetailsPage extends React.Component {
     let commentSnippet = <div />;
     if (hasComments) {
       commentSnippet = (
-        <Link to={{ pathname: routes.COMMENT_LIST, search: `?productId=${this.productId}` }}>Review</Link>
+        <Link to={{ pathname: routes.COMMENT_LIST, search: `?productId=${this.productId}` }}>
+          <Button color="success">Review</Button>
+        </Link>
       );
     }
 
@@ -42,7 +44,12 @@ class ProductDetailsPage extends React.Component {
             <CardImg top width="100%" src={product.imageLink} alt={product.title} />
             <CardBody>
               <CardText>
-                <h5>Product ID: </h5>
+                <Row>
+                  <Col>
+                    <h5>Product ID: </h5>
+                  </Col>
+                  <Col sm={{ offset: 0 }}>{commentSnippet}</Col>
+                </Row>
                 <p>{product.id}</p>
               </CardText>
               <CardText>
@@ -72,7 +79,6 @@ class ProductDetailsPage extends React.Component {
               <CardText>
                 <h5>Updated At: </h5> <p>{product.updatedAt}</p>
               </CardText>
-              {commentSnippet}
             </CardBody>
           </Card>
         </div>
