@@ -27,7 +27,7 @@ class CommentListPage extends React.Component {
     let snippet = <div>LOADING</div>;
     if (status === 'LOADED') {
       snippet = commentList.map(comment => (
-        <Toast key={comment.id} style={{ cursor: 'pointer' }} onClick={this.handleClick.bind(this, comment.id)}>
+        <Toast key={comment.id} style={{ cursor: 'pointer', 'max-width': '100%' }} onClick={this.handleClick.bind(this, comment.id)}>
           <ToastHeader>Review Text</ToastHeader>
           <ToastBody>{comment.content}</ToastBody>
         </Toast>
