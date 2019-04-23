@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Container, Row, Col, Media, Card, CardTitle, CardText } from 'reactstrap';
+import { Container, Row, Col, Media, Card, CardTitle, CardText, Table, Tbody } from 'reactstrap';
 import PropTypes from 'prop-types';
 import * as actions from './actions';
 import routes from '../constants/routes';
 import logo from '../logo.png';
-import ClickableCardGroup from './ClickableCardGroup.js';
+import RecentList from './RecentList';
 import styles from './home.css';
 
 class HomePage extends React.Component {
@@ -17,19 +17,20 @@ class HomePage extends React.Component {
     loadRecentItems();
   }
 
-  onProductClicked(key) {
+  onPressItem = (id) => {
+    console.log(`id: ${id}`);
     const { history } = this.props;
-    history.push(`${routes.PRODUCT_DETAILS}?productId=${key}`);
+    history.push(`${routes.PRODUCT_DETAILS}?productId=${id}`);
   }
+
+  keyExtractor = (item, index) => item.id;
 
   render() {
     const { numOfProducts, numOfComments, contractAddress, recentItems, status } = this.props;
 
     let snippet = <div>LOADING</div>;
     if (status === 'LOADED') {
-      snippet = recentItems.map(item => (
-        <ClickableCardGroup item={item} onClick={this.onProductClicked.bind(this, item.id)} key={item.id} />
-      ));
+      snippet = <Table borderless><tbody><RecentList data={recentItems} onPressItem={this.onPressItem} keyExtractor={this.keyExtractor} /></tbody></Table>;
     }
 
     return (
@@ -68,9 +69,11 @@ class HomePage extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col style={{ 'margin-bottom': '0.5rem', 'margin-top': '0.5rem' }}>Showing the recent records</Col>
+            <Col>Showing the recent records</Col>
           </Row>
-          {snippet}
+          <div>
+            {snippet}
+          </div>
         </Container>
       </div>
     );
