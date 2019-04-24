@@ -18,7 +18,7 @@ class CommentDetailsPage extends React.Component {
     const { comment, status } = this.props;
 
     if (status === 'LOADING') {
-      return <div>LOADING</div>;
+      return <div className="lds-ring"><div></div><div></div><div></div><div></div></div>;
     }
 
     return (
@@ -27,7 +27,7 @@ class CommentDetailsPage extends React.Component {
           <h1 align="center">Review Details</h1>
           <hr />
         </header> */}
-        <div>
+        <div className="comment">
           <Card>
             <CardBody>
               <CardTitle>Review ID:</CardTitle>

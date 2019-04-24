@@ -1,17 +1,74 @@
 .logo {
   height:50px;
   width:50px;
-  margin-right: 1.5rem !important;
+  margin-right: 0.8rem;
 }
 
-.media {
+header .media {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.table tr td {
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  padding-bottom: 0.3rem;
+header .media-heading {
+  margin-bottom: 0.1rem;
+}
+
+header .media-body {
+  font-size: 0.7rem;
+}
+
+.summ {
+  margin: 1.33rem 0 0.67rem;
+  text-align: center;
+}
+
+.summ .card-body {
+  padding: 0.66rem;
+  border-radius: 0.66rem;
+  background-color: #f2f2f2;
+  border: 0;
+}
+
+.summ .card-title {
+  margin-bottom: 0;
+}
+
+.summ .card-text {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.items img {
+  border-radius: 0.66rem;
+  margin-right: 0.75rem;
+}
+
+.items .media {
+  margin: 0 -15px;
+  padding: 0.67rem 15px;
+}
+
+.items .media:active {
+  background-color: #f2f2f2;
+}
+
+.items .media-body {
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.items .media-heading {
+  margin-bottom: 0;
+  color: #191919;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.items .item-price {
+  padding: 0 0.66rem;
+  line-height: 1.33rem;
+  color: #fff;
+  background-color: #ff8303;
+  border-radius: 0.27rem;
 }

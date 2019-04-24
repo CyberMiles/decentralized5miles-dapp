@@ -1,0 +1,71 @@
+.comments {
+    padding: 1.67rem;
+}
+.comments .card {
+    position: relative;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.comments .card:last-child {
+    border-bottom: 0;
+}
+
+.comments .card:before, .comments .card:after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    pointer-events: none;
+}
+
+.comments .card:after {
+    border-color: rgba(255, 255, 255, 0);
+	border-left-color: #fff;
+	border-width: 5px;
+    margin-top: -5px;
+    right: -2px;
+}
+
+.comments .card:before {
+    border-color: rgba(0, 0, 0, 0);
+	border-left-color: #666666;
+	border-width: 8px;
+    margin-top: -8px;
+    right: -8px;
+}
+
+.comments .card-body {
+    padding: 1.25rem 0;
+}
+
+.comments .card-title {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+.comments .card-text {
+    font-size: 1.2rem;
+    color: #191919;
+}
+
+.comment {
+    margin: 1rem 0;
+}
+.comment .card {
+    border: 0;
+}
+
+.comment .card-title {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+.comment .card-body {
+    padding: 0.7rem 1.25rem;
+}

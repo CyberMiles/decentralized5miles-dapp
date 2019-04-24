@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Toast, ToastBody, ToastHeader } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import PropTypes from 'prop-types';
 // import { Link } from 'react-router-dom';
 import * as actions from './actions';
@@ -24,17 +24,18 @@ class CommentListPage extends React.Component {
   render() {
     const { commentList, status } = this.props;
 
-    let snippet = <div>LOADING</div>;
+    let snippet = <div className="lds-ring"><div></div><div></div><div></div><div></div></div>;
     if (status === 'LOADED') {
       snippet = commentList.map(comment => (
-        <Toast
+        <Card
           key={comment.id}
-          style={{ cursor: 'pointer', maxWidth: '100%' }}
           onClick={this.handleClick.bind(this, comment.id)}
         >
-          <ToastHeader>Review Text</ToastHeader>
-          <ToastBody>{comment.content}</ToastBody>
-        </Toast>
+          <CardBody>
+            <CardTitle>Review Text</CardTitle>
+            <CardText>{comment.content}</CardText>
+          </CardBody>
+        </Card>
       ));
     }
 
@@ -44,7 +45,7 @@ class CommentListPage extends React.Component {
           <h1 align="center">Review List</h1>
           <hr />
         </header> */}
-        <div className="p-3 my-2 rounded">{snippet}</div>
+        <div className="comments">{snippet}</div>
       </div>
     );
   }

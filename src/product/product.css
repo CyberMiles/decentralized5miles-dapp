@@ -1,0 +1,40 @@
+.product.with-comments {
+    padding-bottom: 5rem;
+}
+.product img {
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.product .card {
+    border: 0;
+}
+
+.product .card-title {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+.product .card-body {
+    padding: 0.7rem 1.25rem;
+}
+
+.show-comments {
+    position: fixed;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.show-comments a {
+    display: inline-block;
+    line-height: 3rem;
+    padding: 0 3rem;
+    border-radius: 1.5rem;
+    color: #ffffff;
+    font-size: 1.1rem;
+    opacity: 1;
+    background-color: #ff8303;
+}

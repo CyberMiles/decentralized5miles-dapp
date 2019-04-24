@@ -21,15 +21,13 @@ class ProductDetailsPage extends React.Component {
     const { product, status, hasComments } = this.props;
 
     if (status === 'LOADING') {
-      return <div>LOADING</div>;
+      return <div className="lds-ring"><div></div><div></div><div></div><div></div></div>;
     }
 
     let commentSnippet = <div />;
     if (hasComments) {
       commentSnippet = (
-        <Link to={{ pathname: routes.COMMENT_LIST, search: `?productId=${this.productId}` }}>
-          <Button color="success">Review</Button>
-        </Link>
+        <Link to={{ pathname: routes.COMMENT_LIST, search: `?productId=${this.productId}` }}>Show Review</Link>
       );
     }
 
@@ -39,16 +37,11 @@ class ProductDetailsPage extends React.Component {
           <h1 align="center">Product Details</h1>
           <hr />
         </header> */}
-        <div>
+        <div className={"product " + (this.props.hasComments ? "with-comments" : "")}>
           <Card>
             <CardImg top width="100%" src={product.imageLink} alt={product.title} />
             <CardBody>
-              <CardTitle>
-                <Row>
-                  <Col>Product ID:</Col>
-                  <Col sm={{ offset: 0 }}>{commentSnippet}</Col>
-                </Row>
-              </CardTitle>
+              <CardTitle>Product ID:</CardTitle>
               <CardText>{product.id}</CardText>
             </CardBody>
             <CardBody>
@@ -81,6 +74,7 @@ class ProductDetailsPage extends React.Component {
             </CardBody>
           </Card>
         </div>
+        <div class="show-comments">{commentSnippet}</div>
       </div>
     );
   }

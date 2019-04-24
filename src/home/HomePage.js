@@ -28,9 +28,9 @@ class HomePage extends React.Component {
   render() {
     const { numOfProducts, numOfComments, contractAddress, recentItems, status } = this.props;
 
-    let snippet = <div>LOADING</div>;
+    let snippet = <div className="lds-ring"><div></div><div></div><div></div><div></div></div>;
     if (status === 'LOADED') {
-      snippet = <Table borderless><tbody><RecentList data={recentItems} onPressItem={this.onPressItem} keyExtractor={this.keyExtractor} /></tbody></Table>;
+      snippet = <RecentList data={recentItems} onPressItem={this.onPressItem} keyExtractor={this.keyExtractor} />;
     }
 
     return (
@@ -41,37 +41,32 @@ class HomePage extends React.Component {
         </header> */}
 
         <Container>
-          <Row>
-            <Col>
-              <Media>
-                <Media left>
-                  <Media object src={logo} alt="logo" className="logo" />
-                </Media>
-                <Media body>
-                  <Media heading>Contract Address</Media>
-                  {contractAddress}
-                </Media>
+          <header>
+            <Media>
+              <Media left>
+                <Media object src={logo} alt="logo" className="logo" />
               </Media>
-            </Col>
-          </Row>
-          <Row>
+              <Media body>
+                <Media heading>Contract Address</Media>
+                {contractAddress}
+              </Media>
+            </Media>
+          </header>
+          <Row className="summ">
             <Col>
-              <Card body className="text-center">
-                <CardTitle className="h4">Product</CardTitle>
+              <Card body>
+                <CardTitle>Product</CardTitle>
                 <CardText>{numOfProducts}</CardText>
               </Card>
             </Col>
             <Col>
-              <Card body className="text-center">
-                <CardTitle className="h4">Review</CardTitle>
+              <Card body>
+                <CardTitle>Review</CardTitle>
                 <CardText>{numOfComments}</CardText>
               </Card>
             </Col>
           </Row>
-          <Row>
-            <Col>Showing the recent records</Col>
-          </Row>
-          <div>
+          <div className="items">
             {snippet}
           </div>
         </Container>
