@@ -12,7 +12,7 @@ export default class ContractWrapper {
   }
 
   call(method, params) {
-    console.log(`Call contract method ${method} with params: ${params}`);
+    // console.log(`Call contract method ${method} with params: ${params}`);
 
     return new Promise((resolve, reject) => {
       this.instance[method].call(params, (error, result) => {

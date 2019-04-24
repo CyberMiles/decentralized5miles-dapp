@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Card, CardText, CardBody } from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle } from 'reactstrap';
 import PropTypes from 'prop-types';
 import * as actions from './actions';
 import styles from './comment.css';
@@ -18,7 +18,7 @@ class CommentDetailsPage extends React.Component {
     const { comment, status } = this.props;
 
     if (status === 'LOADING') {
-      return <div>LOADING</div>;
+      return <div className="lds-ring"><div></div><div></div><div></div><div></div></div>;
     }
 
     return (
@@ -27,31 +27,27 @@ class CommentDetailsPage extends React.Component {
           <h1 align="center">Review Details</h1>
           <hr />
         </header> */}
-        <div>
+        <div className="comment">
           <Card>
             <CardBody>
-              <CardText>
-                <h5>Review ID: </h5>
-                <p>{comment.id}</p>
-              </CardText>
-              <CardText>
-                <h5>
-                  Product ID: <br />
-                </h5>
-                <p>{comment.productId}</p>
-              </CardText>
-              <CardText>
-                <h5>Review Text: </h5>
-                <p>{comment.content}</p>
-              </CardText>
-              <CardText>
-                <h5>Reviewer ID: </h5>
-                <p>{comment.userId}</p>
-              </CardText>
-              <CardText>
-                <h5>Created At: </h5>
-                <p>{comment.createdAt}</p>
-              </CardText>
+              <CardTitle>Review ID:</CardTitle>
+              <CardText>{comment.id}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle>Product ID:</CardTitle>
+              <CardText>{comment.productId}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle>Review Text:</CardTitle>
+              <CardText>{comment.content}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle>Reviewer ID:</CardTitle>
+              <CardText>{comment.userId}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle> Created At:</CardTitle>
+              <CardText>{comment.createdAt}</CardText>
             </CardBody>
           </Card>
         </div>

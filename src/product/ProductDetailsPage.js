@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Card, CardImg, CardText, CardBody, Row, Col, Button } from 'reactstrap';
+import { Card, CardImg, CardText, CardTitle, CardBody, Row, Col, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as actions from './actions';
@@ -21,15 +21,13 @@ class ProductDetailsPage extends React.Component {
     const { product, status, hasComments } = this.props;
 
     if (status === 'LOADING') {
-      return <div>LOADING</div>;
+      return <div className="lds-ring"><div></div><div></div><div></div><div></div></div>;
     }
 
     let commentSnippet = <div />;
     if (hasComments) {
       commentSnippet = (
-        <Link to={{ pathname: routes.COMMENT_LIST, search: `?productId=${this.productId}` }}>
-          <Button color="success">Review</Button>
-        </Link>
+        <Link to={{ pathname: routes.COMMENT_LIST, search: `?productId=${this.productId}` }}>Show Review</Link>
       );
     }
 
@@ -39,49 +37,44 @@ class ProductDetailsPage extends React.Component {
           <h1 align="center">Product Details</h1>
           <hr />
         </header> */}
-        <div>
+        <div className={"product " + (this.props.hasComments ? "with-comments" : "")}>
           <Card>
             <CardImg top width="100%" src={product.imageLink} alt={product.title} />
             <CardBody>
-              <CardText>
-                <Row>
-                  <Col>
-                    <h5>Product ID: </h5>
-                  </Col>
-                  <Col sm={{ offset: 0 }}>{commentSnippet}</Col>
-                </Row>
-                <p>{product.id}</p>
-              </CardText>
-              <CardText>
-                <h5>Title: </h5>
-                <p>{product.title}</p>
-              </CardText>
-              <CardText>
-                <h5>Description: </h5>
-                <p>{product.desc}</p>
-              </CardText>
-              <CardText>
-                <h5>Category: </h5> <p>{product.category}</p>
-              </CardText>
-              <CardText>
-                <h5>State: </h5>
-                <p> {product.state}</p>
-              </CardText>
-              <CardText>
-                <h5>User ID: </h5> <p>{product.userId}</p>
-              </CardText>
-              <CardText>
-                <h5>Location: </h5> <p>{product.location}</p>
-              </CardText>
-              <CardText>
-                <h5>Created At: </h5> <p>{product.createdAt}</p>
-              </CardText>
-              <CardText>
-                <h5>Updated At: </h5> <p>{product.updatedAt}</p>
-              </CardText>
+              <CardTitle>Product ID:</CardTitle>
+              <CardText>{product.id}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle>Title: </CardTitle>
+              <CardText>{product.title}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle>Description: </CardTitle>
+              <CardText>{product.desc}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle>Category: </CardTitle> <CardText>{product.category}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle>State: </CardTitle>
+              <CardText>{product.state}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle>User ID: </CardTitle> <CardText>{product.userId}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle>Location: </CardTitle> <CardText>{product.location}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle>Created At: </CardTitle> <CardText>{product.createdAt}</CardText>
+            </CardBody>
+            <CardBody>
+              <CardTitle>Updated At:</CardTitle>
+              <CardText> {product.updatedAt}</CardText>
             </CardBody>
           </Card>
         </div>
+        <div class="show-comments">{commentSnippet}</div>
       </div>
     );
   }
