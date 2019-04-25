@@ -18,7 +18,6 @@ class HomePage extends React.Component {
   }
 
   onPressItem = (id) => {
-    console.log(`id: ${id}`);
     const { history } = this.props;
     history.push(`${routes.PRODUCT_DETAILS}?productId=${id}`);
   }
