@@ -29,7 +29,13 @@ class Product {
     const [, title, desc, price, category, location, imageLink] = rawStrArray;
 
     // handle image link(sample: http://res.5milesapp.com/image/upload/v1555646242/byz7phcp583kxxrsjp3w.webp)
-    const ts = imageLink.match(/v[0-9]{10}/)[0]; // v1555646242
+    // const ts = imageLink.match(/v[0-9]{10}/)[0]; // v1555646242
+    const matches = imageLink.match(/v[0-9]{10}/);
+    if (matches == null) {
+      return null;
+    }
+
+    const ts = matches[0]; // v1555646242
     const split = imageLink.split(ts);
     const newImageLink = `${split[0]}f_auto,t_i800/${ts}${split[1]}`
       .replace('http', 'https')
