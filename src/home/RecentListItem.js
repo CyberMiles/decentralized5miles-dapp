@@ -11,7 +11,7 @@ class RecentListItem extends React.PureComponent {
     return (
       <Media onClick={this.onPress}>
         <Media left>
-          <Media object src="https://via.placeholder.com/70" alt={item.title} />
+          <Media object src={item.getImageLinkTransformed('t_i70')} alt={item.title} />
         </Media>
         <Media body>
           <Media heading>

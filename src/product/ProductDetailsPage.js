@@ -39,7 +39,7 @@ class ProductDetailsPage extends React.Component {
         </header> */}
         <div className={"product " + (this.props.hasComments ? "with-comments" : "")}>
           <Card>
-            <CardImg top width="100%" src={product.imageLink} alt={product.title} />
+            <CardImg top width="100%" src={product.getImageLinkTransformed('t_i800')} alt={product.title} />
             <CardBody>
               <CardTitle>Product ID:</CardTitle>
               <CardText>{product.id}</CardText>
@@ -74,7 +74,7 @@ class ProductDetailsPage extends React.Component {
             </CardBody>
           </Card>
         </div>
-        <div class="show-comments">{commentSnippet}</div>
+        <div className="show-comments">{commentSnippet}</div>
       </div>
     );
   }
