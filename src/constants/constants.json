@@ -4,14 +4,14 @@
   "CONTRACT_ADDRESS": "0x07451be2b650c0e78dd430c9d12621d26d225a84",
   "OWNER_ACCOUNT": "0x411380d37faed1509127DDB32cFc56c8A91d38A3",
   "RECENT_ITEMS": [
-    {"id": "329", "note": "上传的第一个商品"},
-    {"id": "38086", "note": "第一个标注了sold out的商品"},
-    {"id": "133418", "note": "成交的第一辆二手车"},
-    {"id": "393297", "note": "第1万辆车"},
-    {"id": "41441754", "note": "最新的一辆车"},
-    {"id": "11892", "note": "第一个被认为是不合规的商品"},
-    {"id": "6808892", "note": "标价最贵的商品"},
-    {"id": "1432280", "note": "担保交易的第一个商品"},
-    {"id": "28925204", "note": "GMV约100亿美元的商品"}
+    {"id": "329", "note": "The first item listed by a 5miles user"},
+    {"id": "38086", "note": "The first item marked “Sold” on 5miles"},
+    {"id": "133418", "note": "The first car sold on 5miles"},
+    {"id": "393297", "note": "The 10000th Car Sold on 5miles"},
+    {"id": "41441754", "note": "The lastest updated car"},
+    {"id": "11892", "note": "The first unapproved listing"},
+    {"id": "6808892", "note": "The most highly priced item"},
+    {"id": "1432280", "note": "The first escrow order"},
+    {"id": "28925204", "note": "The item made total 5miles GMV cross $10 billion"}
   ]
 }

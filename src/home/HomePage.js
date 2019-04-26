@@ -71,7 +71,7 @@ class HomePage extends React.Component {
               </Card>
             </Col>
           </Row>
-          <div className="list-header">The meaningful listings for 5miles</div>
+          <div className="list-header">Selected 5miles listings(since 4/26/2019)</div>
           <div className="items">
             {snippet}
           </div>
