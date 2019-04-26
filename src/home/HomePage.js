@@ -54,13 +54,13 @@ class HomePage extends React.Component {
           <Row className="summ">
             <Col>
               <Card body>
-                <CardTitle>Products count</CardTitle>
+                <CardTitle>Products Count</CardTitle>
                 <CardText>{numOfProducts}</CardText>
               </Card>
             </Col>
             <Col>
               <Card body>
-                <CardTitle>Reviews count</CardTitle>
+                <CardTitle>Reviews Count</CardTitle>
                 <CardText>{numOfComments}</CardText>
               </Card>
             </Col>
