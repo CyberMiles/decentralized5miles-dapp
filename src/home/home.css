@@ -41,6 +41,7 @@ header .media-body {
 .items img {
   border-radius: 0.66rem;
   margin-right: 0.75rem;
+  /* width: 90px; */
 }
 
 .items .media {
@@ -53,7 +54,6 @@ header .media-body {
 }
 
 .items .media-body {
-  margin-top: 0.2rem;
   font-size: 0.9rem;
   color: #666;
 }
@@ -63,12 +63,37 @@ header .media-body {
   color: #191919;
   font-size: 1.1rem;
   font-weight: 500;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 25rem;
+  white-space: nowrap;
 }
 
 .items .item-price {
-  padding: 0 0.66rem;
-  line-height: 1.33rem;
-  color: #fff;
-  background-color: #ff8303;
-  border-radius: 0.27rem;
+  /* padding: 0 0.66rem; */
+  line-height: 1.3;
+  color: #ff8303;
+  /* background-color: #ff8303; */
+  /* border-radius: 0.27rem; */
+  font-size: 1.13rem;
+  font-weight: 500;
+}
+
+.items .item-note {
+  /* width: 157px; */
+  line-height: 2;
+  font-size: 0.8rem;
+  /* font-weight: normal;
+  font-style: normal;
+  font-stretch: normal; */
+  /* letter-spacing: normal; */
+  color: #999999;
+}
+
+.items .item-desc {
+  max-height: 1.8rem;
+  line-height: 1.14;
+  font-size: 0.8rem;
+  overflow: hidden;
 }

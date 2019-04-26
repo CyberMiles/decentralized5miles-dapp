@@ -47,8 +47,8 @@ export default class ContractWrapper {
   }
 
   loadRecentItems() {
-    const promises = constants.RECENT_ITEM_IDS.map(id => {
-      return this.getProductById(id);
+    const promises = constants.RECENT_ITEMS.map(item => {
+      return this.getProductById(item.id);
     });
 
     return Promise.all(promises);
