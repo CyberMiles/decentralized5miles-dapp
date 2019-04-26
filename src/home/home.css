@@ -18,7 +18,7 @@ header .media-body {
 }
 
 .summ {
-  margin: 1.33rem -15px 0.67rem;
+  margin: 0.67rem -15px 0.67rem;
   text-align: center;
 }
 
@@ -104,7 +104,7 @@ header .media-body {
   margin-bottom: 0.3rem;
 }
 
-.list-header #title {
+.list-header {
   height: 1.1rem;
   font-size: 1.1rem;
   font-weight: 500;
@@ -113,8 +113,9 @@ header .media-body {
   color: #666666;
 }
 
-.list-header #since {
+.container .since {
   line-height: 1;
   font-size: 0.8rem;
   color: #999999;
+  /* margin-bottom: 0.2rem; */
 }
