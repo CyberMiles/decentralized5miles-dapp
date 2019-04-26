@@ -99,14 +99,22 @@ header .media-body {
 }
 
 .list-header {
-  /* width: 15.1rem; */
+  text-align: center;
+  margin-top: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.list-header #title {
   height: 1.1rem;
   font-size: 1.1rem;
   font-weight: 500;
   line-height: 1;
   letter-spacing: normal;
   color: #666666;
-  margin-left: 3rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+}
+
+.list-header #since {
+  line-height: 1;
+  font-size: 0.8rem;
+  color: #999999;
 }
