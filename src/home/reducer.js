@@ -13,6 +13,9 @@ const initialState = () => ({
   numOfComments: 0,
   contractAddress: constants.CONTRACT_ADDRESS,
   recentItems: [],
+  numOfProductsLoadingStatus: 'LOADING',
+  numOfCommentsLoadingStatus: 'LOADING',
+  recentItemsLoadingStatus: 'LOADING',
 });
 
 export default (state = initialState(), action) => {
@@ -21,19 +24,19 @@ export default (state = initialState(), action) => {
       return { ...state, status: 'LOADING' };
     }
     case LOAD_NUM_OF_COMMENTS_SUCCESS: {
-      return { ...state, numOfComments: action.numOfComments, status: 'LOADED' };
+      return { ...state, numOfComments: action.numOfComments, numOfCommentsLoadingStatus: 'LOADED' };
     }
     case LOAD_NUM_OF_PRODUCTS_STARTED: {
       return { ...state, status: 'LOADING' };
     }
     case LOAD_NUM_OF_PRODUCTS_SUCCESS: {
-      return { ...state, numOfProducts: action.numOfProducts, status: 'LOADED' };
+      return { ...state, numOfProducts: action.numOfProducts, numOfProductsLoadingStatus: 'LOADED' };
     }
     case LOAD_RECENT_ITEMS_STARTED: {
       return { ...state, status: 'LOADING' };
     }
     case LOAD_RECENT_ITEMS_SUCCESS: {
-      return { ...state, recentItems: action.recentItems, status: 'LOADED' };
+      return { ...state, recentItems: action.recentItems, recentItemsLoadingStatus: 'LOADED' };
     }
     default:
       return state;

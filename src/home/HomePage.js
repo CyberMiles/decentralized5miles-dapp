@@ -14,6 +14,12 @@ class HomePage extends React.Component {
     const { loadNumOfComments, loadNumOfProducts, loadRecentItems } = this.props;
     loadNumOfProducts();
     loadNumOfComments();
+
+    setInterval(() => {
+      loadNumOfProducts();
+      loadNumOfComments();
+    }, 5000);
+
     loadRecentItems();
   }
 
@@ -25,10 +31,10 @@ class HomePage extends React.Component {
   keyExtractor = (item, index) => item.id;
 
   render() {
-    const { numOfProducts, numOfComments, contractAddress, recentItems, status } = this.props;
+    const { numOfProducts, numOfComments, contractAddress, recentItems, numOfProductsLoadingStatus, numOfCommentsLoadingStatus, recentItemsLoadingStatus } = this.props;
 
     let snippet = <div className="lds-ring"><div></div><div></div><div></div><div></div></div>;
-    if (status === 'LOADED') {
+    if (recentItemsLoadingStatus === 'LOADED') {
       snippet = <RecentList data={recentItems} onPressItem={this.onPressItem} keyExtractor={this.keyExtractor} />;
     }
 
@@ -80,7 +86,9 @@ const mapStateToProps = state => ({
   numOfComments: state.home.numOfComments,
   contractAddress: state.home.contractAddress,
   recentItems: state.home.recentItems,
-  status: state.home.status,
+  numOfProductsLoadingStatus: state.home.numOfProductsLoadingStatus,
+  numOfCommentsLoadingStatus: state.home.numOfCommentsLoadingStatus,
+  recentItemsLoadingStatus: state.home.recentItemsLoadingStatus
 });
 
 const mapDispatchToProps = dispatch => {
@@ -97,11 +105,16 @@ HomePage.propTypes = {
   loadNumOfComments: PropTypes.func.isRequired,
   loadRecentItems: PropTypes.func.isRequired,
   status: PropTypes.string,
+  numOfProductsLoadingStatus: PropTypes.string,
+  numOfCommentsLoadingStatus: PropTypes.string,
+  recentItemsLoadingStatus: PropTypes.string
 };
 
 HomePage.defaultProps = {
   recentItems: [],
-  status: 'LOADING',
+  numOfProductsLoadingStatus: 'LOADING',
+  numOfCommentsLoadingStatus: 'LOADING',
+  recentItemsLoadingStatus: 'LOADING',
 };
 
 export default connect(
