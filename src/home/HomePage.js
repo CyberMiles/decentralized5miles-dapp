@@ -65,6 +65,7 @@ class HomePage extends React.Component {
               </Card>
             </Col>
           </Row>
+          <div className="list-header">The meaningful listings for 5miles</div>
           <div className="items">
             {snippet}
           </div>
