@@ -57,7 +57,7 @@ class HomePage extends React.Component {
               </Media>
             </Media>
           </header>
-          <p className="since">since 4/26/2019</p>
+          <p className="since">since 5/9/2019</p>
           <Row className="summ">
             <Col>
               <Card body>
