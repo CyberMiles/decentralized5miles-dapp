@@ -4,6 +4,7 @@
   "CONTRACT_ADDRESS": "0xa3f1e99c46d1d7e6cc96f71b6116cee8160fa4d3",
   "OWNER_ACCOUNT": "0x411380d37faed1509127DDB32cFc56c8A91d38A3",
   "RECENT_ITEMS": [
+    {"id": "28925204", "note": "The item made total 5miles GMV cross $10 billion"},
     {"id": "329", "note": "The first item listed by a 5miles user"},
     {"id": "38086", "note": "The first item marked “Sold” on 5miles"},
     {"id": "133418", "note": "The first car sold on 5miles"},
@@ -11,7 +12,6 @@
     {"id": "41441754", "note": "The lastest updated car"},
     {"id": "11892", "note": "The first unapproved listing"},
     {"id": "6808892", "note": "The most highly priced item"},
-    {"id": "1432280", "note": "The first escrow order"},
-    {"id": "28925204", "note": "The item made total 5miles GMV cross $10 billion"}
+    {"id": "1432280", "note": "The first escrow order"}
   ]
 }
