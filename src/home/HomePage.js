@@ -10,6 +10,14 @@ import RecentList from './RecentList';
 import styles from './home.css';
 
 class HomePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentDidMount() {
     const { loadNumOfComments, loadNumOfProducts, loadRecentItems } = this.props;
     loadNumOfProducts();
@@ -21,6 +29,16 @@ class HomePage extends React.Component {
     }, 5000);
 
     loadRecentItems();
+  }
+  
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    const { history } = this.props;
+    history.push(`${routes.PRODUCT_DETAILS}?productId=${this.state.value}`);
+    event.preventDefault();
   }
 
   onPressItem = (id) => {
@@ -70,6 +88,14 @@ class HomePage extends React.Component {
                 <CardTitle>Reviews Count</CardTitle>
                 <CardText>{numOfComments}</CardText>
               </Card>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <form onSubmit={this.handleSubmit}>
+                <input placeholder="Product ID" type="text" value={this.state.value} onChange={this.handleChange} />
+                <input class="btn btn-outline-dark btn-sm" type="submit" value="Submit" />
+              </form>
             </Col>
           </Row>
           <p className="list-header">Selected 5miles listings</p>
