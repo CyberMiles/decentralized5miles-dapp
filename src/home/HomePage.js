@@ -36,7 +36,8 @@ class HomePage extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    const { history } = this.props;
+    history.push(`${routes.PRODUCT_DETAILS}?productId=${this.state.value}`);
     event.preventDefault();
   }
 
@@ -89,7 +90,7 @@ class HomePage extends React.Component {
               </Card>
             </Col>
           </Row>
-          <form onSubmit={this.onPressItem}>
+          <form onSubmit={this.handleSubmit}>
             <label>
               Product ID:
               <input type="text" value={this.state.value} onChange={this.handleChange} />
