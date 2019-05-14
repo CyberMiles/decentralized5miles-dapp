@@ -93,10 +93,7 @@ class HomePage extends React.Component {
           <Row>
             <Col>
               <form onSubmit={this.handleSubmit}>
-                <label>
-                  Product ID:
-                  <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
+                  <input placeholder="Product ID" type="text" value={this.state.value} onChange={this.handleChange} />
                 <input class="btn btn-outline-dark btn-sm" type="submit" value="Submit" />
               </form>
             </Col>
