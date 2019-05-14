@@ -10,6 +10,14 @@ import RecentList from './RecentList';
 import styles from './home.css';
 
 class HomePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentDidMount() {
     const { loadNumOfComments, loadNumOfProducts, loadRecentItems } = this.props;
     loadNumOfProducts();
@@ -21,6 +29,15 @@ class HomePage extends React.Component {
     }, 5000);
 
     loadRecentItems();
+  }
+  
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
   }
 
   onPressItem = (id) => {
@@ -72,6 +89,13 @@ class HomePage extends React.Component {
               </Card>
             </Col>
           </Row>
+          <form onSubmit={this.onPressItem}>
+            <label>
+              Product ID:
+              <input type="text" value={this.state.value} onChange={this.handleChange} />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
           <p className="list-header">Selected 5miles listings</p>
           <div className="items">
             {snippet}
