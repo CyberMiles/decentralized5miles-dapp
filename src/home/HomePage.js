@@ -90,14 +90,17 @@ class HomePage extends React.Component {
               </Card>
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <form onSubmit={this.handleSubmit}>
-                <input placeholder="Product ID" type="text" value={this.state.value} onChange={this.handleChange} />
-                <input class="btn btn-outline-dark btn-sm" type="submit" value="Submit" />
-              </form>
-            </Col>
-          </Row>
+          <Container>
+            <Row>
+              <Col>
+                <form onSubmit={this.handleSubmit}>
+                  <input placeholder="Product ID" type="text" value={this.state.value} onChange={this.handleChange} />
+                  <input class="btn btn-outline-dark btn-sm" type="submit" value="Submit" />
+                </form>
+              </Col>
+            </Row>
+          </Container>
+         
           <p className="list-header">Selected 5miles listings</p>
           <div className="items">
             {snippet}
